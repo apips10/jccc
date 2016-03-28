@@ -1,0 +1,90 @@
+#include <iostream>     // Input/Output
+#include <string>       // String Data Type
+using namespace std;
+
+void drawSquare(int width, int height)
+{
+	for (int y = 0; y < height; y++)
+	{
+		for (int x = 0; x < width; x++)
+		{
+			cout << "*";
+		}
+		cout << "/n";
+	}
+
+}
+
+int main()
+{
+	bool done = false;
+	float balance = 0;
+	
+	while (!done) //done is false
+	{
+		cout << endl << "BANK PROGRAM" << endl;
+		cout << "1.Deposit Funds" << endl;
+		cout << "2.Withdraw funds" << endl;
+		cout << "3.Check Balance" << endl;
+		cout << "4.Exit" << endl;
+		
+		int choice;
+		cout << "Choice: ";
+		cin >> choice;
+
+		if (choice == 1)
+		{ 
+			cout << "How much do you want to deposit?";
+			float amount;
+			cin >> amount;
+
+			if (amount <= 0)
+			{ 
+				cout << "You cannot deposit $0 or less.";
+			}
+			else
+			{
+				balance += amount;
+			}
+		}
+		
+		else if (choice == 2)
+		{
+			cout << "How much do you want to withdraw?";
+			float amount;
+			cin >> amount;
+
+			if (amount <= 0)
+			{
+				cout << "You cannot withdraw $0 or less!" << endl;
+			}
+			else if (amount > balance)
+			{
+				cout << "You cannot withdraw more than your balance!" << endl;
+			}
+			else
+			{
+				balance -= amount; // balance = balance - amount;
+			}
+
+		}
+		else if (choice == 3)
+		{
+			cout << "Your Balance is: ";
+			cout << "$" << balance << endl;
+
+		}
+		else if (choice == 4)
+		{ 
+			cout << "Are you sure you want to quit? (y/n):";
+			char chooseQuit;
+			cin >> chooseQuit;
+		
+			if (chooseQuit == 'y' || chooseQuit == 'Y')
+			{
+				done = true;
+			}
+		}
+	}
+	return 0;
+}
