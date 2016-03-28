@@ -1,4 +1,4 @@
-#include <iostream>     // Input/Output
+#include <iostream>     // InputOutput
 #include <string>       // String Data Type
 using namespace std;
 
