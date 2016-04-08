@@ -1,0 +1,109 @@
+// Made by Austin Fritz and  Austin Piper
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int choice;
+
+class Character
+{
+public:
+	void getAttack(int value)
+	{
+		if (choice == 1)
+		{
+			HP -= value;
+		}
+		else
+		{
+		}
+	}
+	void getHurt(int value)
+	{
+		if (choice == 1)
+		{
+			HP += value;
+		}
+		else
+		{
+			HP -= value;
+		}
+	}
+
+
+	int returnAttack()
+	{
+		return atk;
+	}
+
+	int returnHP()
+	{
+		return HP;
+	}
+	int HP;
+
+protected:
+	string name;
+	
+	int atk;
+
+private:
+
+};
+class Enemy : public Character
+{
+	void attackOrDefend()
+	{
+		int randomChoice = rand() % 100 + 1;
+
+		if (randomChoice % 2)
+		{
+			choice = 1;
+		}
+		else
+		{
+			choice = 0;
+		}
+	}
+};
+class player : public Character
+{public:
+	void attackOrDefend()
+	{
+		cout << "Player Menu" << endl << "1. Attack" << endl << "2.Defend";
+		while (choice < 1 || choice >= 2)
+		{
+			cin >> choice;
+		}
+
+		if (choice == 1)
+		{
+			int value;
+			cout << "Enter Damage Amount :";
+			cin >> value;
+			getAttack(value);
+		}
+		else
+		{
+			int value;
+			cout << "Enter hurt Amount :";
+			cin >> value;
+			getHurt(value);
+		}
+	}
+};
+
+int main()
+{
+	Enemy enemyOne;
+	player playerOne;
+	playerOne.HP = 100;
+	enemyOne.HP = 100;
+
+	while (enemyOne.HP > 0 && playerOne.HP > 0)
+	{
+		playerOne.attackOrDefend();
+	}
+	return 0;
+}
