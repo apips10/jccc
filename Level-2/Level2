@@ -1,0 +1,123 @@
+// Made by Austin Fritz and  Austin Piper
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+class question
+{
+public:
+	void setQuestion(const string& value)
+	{
+		m_question = value;
+	}
+
+protected:
+	string m_question;
+
+private:
+
+};
+
+class TrueFalseQuestion : public question
+{
+public:
+	void setCorrectAnswer(bool value)
+	{
+		m_correctAnswer = value;
+	}
+	bool askQuestion()
+	{
+		cout << m_question << endl;
+		cout << "Enter 'T' for True or 'F' for False:" << endl;
+		char input;
+		cin >> input;
+
+		if (input == 't' || input == 'T')
+		{
+			if (m_correctAnswer == true)
+			{
+				return true;
+			}
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+protected:
+private:
+bool m_correctAnswer;
+};
+
+class MultipleChoiceQuestion : public question
+{
+public:
+	void setAnswer(int index, const string& value)
+{
+	if (index >= 0 || index <= 4)
+	{
+		m_answers[index] = value;
+	}
+	else
+	{
+		cout << "Invalid Index" << endl;
+	}
+}
+	void setCorrectAnswer(int index)
+	   {
+		   m_correctAnswer = index;
+	   }
+	bool askQuestion()
+	   {
+		   cout << m_question << endl;
+		   cout << "0." << m_answers[0] << endl;
+		   cout << "1." << m_answers[1] << endl;
+		   cout << "2." << m_answers[2] << endl;
+		   cout << "3." << m_answers[3] << endl;
+		   cout << "Select the # with the correct answer." << endl;
+		   int input;
+		   cin >> input;
+
+		   if (input == m_correctAnswer)
+		   {
+			   return true;
+		   }
+		   else
+		   {
+			   return false;
+		   }
+	   }
+protected:
+private: 
+string m_answers[4];
+int m_correctAnswer = 3;
+
+
+};
+
+int main()
+{
+	TrueFalseQuestion question1;
+	MultipleChoiceQuestion question2;
+	question1.setQuestion("The capital of Kansas is Topeka?");
+	question1.setCorrectAnswer(true);
+	question2.setQuestion("Which state has the capital of Jefferson City?");
+	question2.setAnswer(0, "Missouri");
+	question2.setAnswer(1, "Oklahoma");
+	question2.setAnswer(2, "Arkansas");
+	question2.setAnswer(3, "Washington");
+	question2.setCorrectAnswer(0);
+	int score = 0;
+	if (question1.askQuestion())
+	{
+		score++;
+	}
+	if (question2.askQuestion())
+	{
+		score++;
+	}
+	cout << endl << "You got " << score << " out of 2." << endl;
+	return 0;
+}
